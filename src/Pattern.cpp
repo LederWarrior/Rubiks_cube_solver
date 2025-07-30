@@ -67,7 +67,7 @@ void Pattern::Pattern::down(FaceColor temp[3])
     for (int i = 0; i < 3; ++i)
         _logicalCube[FRONT][2][i] = _logicalCube[LEFT][2][i];
     for (int i = 0; i < 3; ++i)
-        _logicalCube[LEFT][2][i] = _logicalCube[BACK][2][i];
+        _logicalCube[LEFT][2][i] = _logicalCube[BACK][2][2 - i];
     for (int i = 0; i < 3; ++i)
         _logicalCube[BACK][2][2 - i] = _logicalCube[RIGHT][2][i];
     for (int i = 0; i < 3; ++i)
@@ -133,66 +133,104 @@ void Pattern::Pattern::back(FaceColor temp[3])
 void Pattern::Pattern::rotatex()
 {
     FaceColor temp[6][3][3];
-
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
         for (int j = 0; j < 3; j++)
-            for (int f = 0; f < 3; f++)
-                temp[i][j][f] = _logicalCube[i][j][f];
-    }
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++)
+                temp[i][j][k] = _logicalCube[i][j][k];
+
+    // UP -> FRONT
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
             _logicalCube[FRONT][i][j] = temp[UP][i][j];
+
+    // FRONT -> DOWN
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
             _logicalCube[DOWN][i][j] = temp[FRONT][i][j];
-            _logicalCube[BACK][i][j] = temp[DOWN][i][j];
-            _logicalCube[UP][i][j] = temp[BACK][i][j];
-        }
-    }
+
+    // DOWN -> BACK (attention à retourner verticalement)
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[BACK][i][j] = temp[DOWN][2 - i][2 - j]; // inversé
+
+    // BACK -> UP
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[UP][i][j] = temp[BACK][2 - i][2 - j]; // inversé
+
+    // LEFT et RIGHT tournent sur elles-mêmes
+    for (int i = 0; i < 3; i++)
+        classicRotate(RIGHT);
+    classicRotate(LEFT);
 }
 
 void Pattern::Pattern::rotatey()
 {
     FaceColor temp[6][3][3];
-
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
         for (int j = 0; j < 3; j++)
-            for (int f = 0; f < 3; f++)
-                temp[i][j][f] = _logicalCube[i][j][f];
-    }
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            _logicalCube[FRONT][i][j] = temp[LEFT][i][j];
-            _logicalCube[RIGHT][i][j] = temp[FRONT][i][j];
-            _logicalCube[BACK][i][j] = temp[RIGHT][i][j];
-            _logicalCube[LEFT][i][j] = temp[BACK][i][j];
-        }
-    }
+            for (int k = 0; k < 3; k++)
+                temp[i][j][k] = _logicalCube[i][j][k];
+
+    // FRONT -> RIGHT
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[FRONT][i][j] = temp[RIGHT][i][j];
+
+    // RIGHT -> BACK (attention : inversé horizontalement)
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[LEFT][i][j] = temp[FRONT][i][j];
+
+    // BACK -> LEFT (attention : inversé horizontalement)
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[BACK][i][j] = temp[LEFT][i][j];
+
+    // LEFT -> FRONT
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[RIGHT][i][j] = temp[BACK][i][j];
+
+    // UP et DOWN tournent
+    classicRotate(UP);
+    for (int i = 0; i < 3; i++)
+        classicRotate(DOWN); // sens inverse
 }
 
 void Pattern::Pattern::rotatez()
 {
     FaceColor temp[6][3][3];
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
         for (int j = 0; j < 3; j++)
-            for (int f = 0; f < 3; f++)
-                temp[i][j][f] = _logicalCube[i][j][f];
-    }
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            _logicalCube[UP][i][j] = temp[RIGHT][i][j];
-            _logicalCube[LEFT][i][j] = temp[UP][i][j];
-            _logicalCube[DOWN][i][j] = temp[LEFT][i][j];
-            _logicalCube[RIGHT][i][j] = temp[DOWN][i][j];
-        }
-    }
-    for (int i = 0; i < 3; i++) {
-        classicRotate(UP);
-        classicRotate(LEFT);
-        classicRotate(DOWN);
-        classicRotate(RIGHT);
-        classicRotate(FRONT);
+            for (int k = 0; k < 3; k++)
+                temp[i][j][k] = _logicalCube[i][j][k];
+
+    // UP -> RIGHT
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[RIGHT][i][j] = temp[UP][2 - j][i]; // rotation
+
+    // RIGHT -> DOWN
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[DOWN][i][j] = temp[RIGHT][2 - j][i];
+
+    // DOWN -> LEFT
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[LEFT][i][j] = temp[DOWN][2 - j][i];
+
+    // LEFT -> UP
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            _logicalCube[UP][i][j] = temp[LEFT][2 - j][i];
+
+    // FRONT et BACK tournent
+    classicRotate(FRONT);
+    for (int i = 0; i < 3; i++)
         classicRotate(BACK);
-    }
 }
 
 void Pattern::Pattern::rotateFace(int face_index)
@@ -200,24 +238,26 @@ void Pattern::Pattern::rotateFace(int face_index)
     switch (face_index) {
         case MIDDLE:
             rotateFace(RIGHT);
-            rotateFaceP(LEFT);
+            for (int i = 0; i < 3; i++)
+                rotateFace(LEFT);
             rotatex();
             return;
         case EQUATOR:
             rotateFace(UP);
-            rotateFaceP(DOWN);
-            rotatey();
+            for (int i = 0; i < 3; i++)
+                rotateFace(DOWN);
+            for (int i = 0; i < 3; i++)
+                rotatey();
             return;
         case STANDING:
-            rotateFaceP(FRONT);
-            rotateFace(BACK);
             for (int i = 0; i < 3; i++)
-                rotatez();
+                rotateFace(FRONT);
+            rotateFace(BACK);
+            rotatez();
             return;
         default:
             break;
     }
-
     classicRotate(face_index);
     FaceColor temp2[3];
     if (face_index == UP) {
