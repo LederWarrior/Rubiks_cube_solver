@@ -137,28 +137,18 @@ void Pattern::Pattern::rotatex()
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 3; k++)
                 temp[i][j][k] = _logicalCube[i][j][k];
-
-    // UP -> FRONT
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[FRONT][i][j] = temp[UP][i][j];
-
-    // FRONT -> DOWN
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[DOWN][i][j] = temp[FRONT][i][j];
-
-    // DOWN -> BACK (attention à retourner verticalement)
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[BACK][i][j] = temp[DOWN][2 - i][2 - j]; // inversé
-
-    // BACK -> UP
+            _logicalCube[BACK][i][j] = temp[DOWN][2 - i][2 - j];
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[UP][i][j] = temp[BACK][2 - i][2 - j]; // inversé
-
-    // LEFT et RIGHT tournent sur elles-mêmes
+            _logicalCube[UP][i][j] = temp[BACK][2 - i][2 - j];
     for (int i = 0; i < 3; i++)
         classicRotate(RIGHT);
     classicRotate(LEFT);
@@ -171,31 +161,21 @@ void Pattern::Pattern::rotatey()
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 3; k++)
                 temp[i][j][k] = _logicalCube[i][j][k];
-
-    // FRONT -> RIGHT
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[FRONT][i][j] = temp[RIGHT][i][j];
-
-    // RIGHT -> BACK (attention : inversé horizontalement)
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[LEFT][i][j] = temp[FRONT][i][j];
-
-    // BACK -> LEFT (attention : inversé horizontalement)
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[BACK][i][j] = temp[LEFT][i][j];
-
-    // LEFT -> FRONT
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[RIGHT][i][j] = temp[BACK][i][j];
-
-    // UP et DOWN tournent
     classicRotate(UP);
     for (int i = 0; i < 3; i++)
-        classicRotate(DOWN); // sens inverse
+        classicRotate(DOWN);
 }
 
 void Pattern::Pattern::rotatez()
@@ -206,28 +186,18 @@ void Pattern::Pattern::rotatez()
         for (int j = 0; j < 3; j++)
             for (int k = 0; k < 3; k++)
                 temp[i][j][k] = _logicalCube[i][j][k];
-
-    // UP -> RIGHT
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[RIGHT][i][j] = temp[UP][2 - j][i]; // rotation
-
-    // RIGHT -> DOWN
+            _logicalCube[RIGHT][i][j] = temp[UP][2 - j][i];
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[DOWN][i][j] = temp[RIGHT][2 - j][i];
-
-    // DOWN -> LEFT
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[LEFT][i][j] = temp[DOWN][2 - j][i];
-
-    // LEFT -> UP
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
             _logicalCube[UP][i][j] = temp[LEFT][2 - j][i];
-
-    // FRONT et BACK tournent
     classicRotate(FRONT);
     for (int i = 0; i < 3; i++)
         classicRotate(BACK);
