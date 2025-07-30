@@ -56,12 +56,17 @@ namespace Pattern
             void rotatey();
             void rotatez();
             void rotateFace(int face_index);
-            void rotateFaceP(int face_index);
             void printLogicalCube();
+            void makeMargueritte();
+            // FaceName findInLine(FaceColor color, std::vector<FaceName> faces) const;
+
+
+            void turnToYellowCenter();
 
         protected:
         private:
             FaceColor _logicalCube[6][3][3];
+            std::string _solution;
     };
 
     // class Square {

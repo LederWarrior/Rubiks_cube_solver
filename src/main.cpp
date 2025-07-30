@@ -11,13 +11,15 @@ int main()
 {
     Pattern::Pattern pattern;
 
-    // pattern.rotateFace(Pattern::BACK);
+    pattern.rotateFace(Pattern::BACK);
     pattern.rotateFace(Pattern::RIGHT);
-    pattern.rotateFace(Pattern::RIGHT);
-    // pattern.rotateFaceP(Pattern::UP);
+    pattern.rotateFace(Pattern::UP);
     pattern.rotateFace(Pattern::LEFT);
     pattern.rotateFace(Pattern::DOWN);
     pattern.rotateFace(Pattern::EQUATOR);
+    pattern.rotateFace(Pattern::STANDING);
+    pattern.rotateFace(Pattern::MIDDLE);
+    pattern.turnToYellowCenter();
     // pattern.rotatez();
     pattern.printLogicalCube();
     // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();
