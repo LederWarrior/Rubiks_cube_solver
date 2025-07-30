@@ -7,8 +7,20 @@
 
 #include "../includes/Display.hpp"
 
-Display::Display()
+Display::Display(std::shared_ptr<Pattern::Pattern> cube_pattern) : _cube_pattern(cube_pattern)
 {
+    static sf::VideoMode mode = sf::VideoMode::getDesktopMode();
+    sf::RenderWindow window(mode, "Rubik's Cube solver");
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear(sf::Color::White);
+        window.display();
+    }
 }
 
 Display::~Display()

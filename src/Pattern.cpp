@@ -68,11 +68,11 @@ void Pattern::Pattern::down(FaceColor temp[3])
     for (int i = 0; i < 3; ++i)
         temp[i] = _logicalCube[FRONT][2][i];
     for (int i = 0; i < 3; ++i)
-        _logicalCube[FRONT][2][i] = _logicalCube[LEFT][2][2 - i];
+        _logicalCube[FRONT][2][i] = _logicalCube[LEFT][2][i];
     for (int i = 0; i < 3; ++i)
         _logicalCube[LEFT][2][i] = _logicalCube[BACK][2][2 - i];
     for (int i = 0; i < 3; ++i)
-        _logicalCube[BACK][2][2 - i] = _logicalCube[RIGHT][2][2 - i];
+        _logicalCube[BACK][2][i] = _logicalCube[RIGHT][2][i];
     for (int i = 0; i < 3; ++i)
         _logicalCube[RIGHT][2][i] = temp[i];
 }
@@ -206,6 +206,23 @@ void Pattern::Pattern::rotatez()
         classicRotate(BACK);
 }
 
+static std::string getFace(Pattern::FaceName face)
+{
+    if (face == Pattern::UP)
+        return "UP";
+    if (face == Pattern::DOWN)
+        return "DOWN";
+    if (face == Pattern::FRONT)
+        return "FRONT";
+    if (face == Pattern::RIGHT)
+        return "RIGHT";
+    if (face == Pattern::LEFT)
+        return "LEFT";
+    if (face == Pattern::BACK)
+        return "BACK";
+    return nullptr;
+}
+
 void Pattern::Pattern::rotateFace(int face_index)
 {
     switch (face_index) {
@@ -231,6 +248,7 @@ void Pattern::Pattern::rotateFace(int face_index)
         default:
             break;
     }
+    std::cout << getFace(static_cast<FaceName>(face_index)) << std::endl;
     classicRotate(face_index);
     FaceColor temp2[3];
     if (face_index == UP) {
@@ -268,23 +286,6 @@ static std::string getColor(Pattern::FaceColor color)
         return "RED";
     if (color == Pattern::ORANGE)
         return "ORANGE";
-    return nullptr;
-}
-
-static std::string getFace(Pattern::FaceName face)
-{
-    if (face == Pattern::UP)
-        return "UP";
-    if (face == Pattern::DOWN)
-        return "DOWN";
-    if (face == Pattern::FRONT)
-        return "FRONT";
-    if (face == Pattern::RIGHT)
-        return "RIGHT";
-    if (face == Pattern::LEFT)
-        return "LEFT";
-    if (face == Pattern::BACK)
-        return "BACK";
     return nullptr;
 }
 

@@ -12,16 +12,20 @@ int main()
     Pattern::Pattern pattern;
 
     pattern.rotateFace(Pattern::BACK);
+    pattern.rotateFace(Pattern::DOWN);
+    pattern.rotateFace(Pattern::STANDING);
     pattern.rotateFace(Pattern::RIGHT);
-    pattern.rotateFace(Pattern::UP);
     pattern.rotateFace(Pattern::LEFT);
     pattern.rotateFace(Pattern::DOWN);
     pattern.rotateFace(Pattern::EQUATOR);
-    pattern.rotateFace(Pattern::STANDING);
     pattern.rotateFace(Pattern::MIDDLE);
-    pattern.turnToYellowCenter();
-    // pattern.rotatez();
+    pattern.rotateFace(Pattern::UP);
+    // pattern.turnToYellowCenter();
+    pattern.makeMargueritte();
     pattern.printLogicalCube();
+    // pattern.rotatez();
+
+    // Display disp_window();
     // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();
     // sf::RenderWindow window(mode, "Rubik's Cube solver");
 

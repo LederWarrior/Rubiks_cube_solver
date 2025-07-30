@@ -12,8 +12,9 @@
 
 class Display {
     public:
-        Display();
+        Display(std::shared_ptr<Pattern::Pattern> cube_pattern);
         ~Display();
+        void setCube(std::shared_ptr<Pattern::Pattern> cube_pattern);
         void show(Pattern::FaceColor base_cube[6][3][3]);
 
     protected:
