@@ -25,30 +25,39 @@ namespace Pattern
         FRONT,
         BACK,
         LEFT,
-        RIGHT
+        RIGHT,
+        MIDDLE,
+        EQUATOR,
+        STANDING,
+        X,
+        Y,
+        Z
     };
 
-    class Rotations {
+    class Pattern {
         public:
-            Rotations(FaceColor logicalCube[6][3][3]);
-            ~Rotations();
-            void setCube(FaceColor logicalCube[6][3][3]);
+            Pattern();
+            ~Pattern();
+            bool isDoable();
+            std::string solve();
+            void reset();
             const FaceColor (&getLogicalCube() const)[6][3][3] {
                 return _logicalCube;
             }
-            const FaceColor (&rotateUP())[6][3][3];
-            const FaceColor (&rotateUPp() const)[6][3][3];
-            const FaceColor (&rotateDOWN() const)[6][3][3];
-            const FaceColor (&rotateDOWNp() const)[6][3][3];
-            const FaceColor (&rotateFRONT() const)[6][3][3];
-            const FaceColor (&rotateFRONTp() const)[6][3][3];
-            const FaceColor (&rotateRIGHT() const)[6][3][3];
-            const FaceColor (&rotateRIGHTp() const)[6][3][3];
-            const FaceColor (&rotateLEFT() const)[6][3][3];
-            const FaceColor (&rotateLEFTp() const)[6][3][3];
-            const FaceColor (&rotateBACK() const)[6][3][3];
-            const FaceColor (&rotateBACKp() const)[6][3][3];
+
+            void up(FaceColor temp[3]);
+            void down(FaceColor temp[3]);
+            void front(FaceColor temp[3]);
+            void right(FaceColor temp[3]);
+            void left(FaceColor temp[3]);
+            void back(FaceColor temp[3]);
+            void rotateFace(int face_index);
+            void rotateFaceP(int face_index);
+            void printLogicalCube();
+
+        protected:
         private:
+
             FaceColor _logicalCube[6][3][3];
     };
 
@@ -149,25 +158,4 @@ namespace Pattern
     //         std::pair<int, int> getCoordinates() override;
     //         sf::Color getGlobalColor() override;
     // };
-
-    class Pattern {
-        public:
-            Pattern();
-            ~Pattern();
-            bool isDoable();
-            std::string solve();
-            void reset();
-            const FaceColor (&getLogicalCube() const)[6][3][3] {
-                return _logicalCube;
-            }
-
-            void rotateFace(int face_index);
-            void rotateFaceP(int face_index);
-            void printLogicalCube();
-
-        protected:
-        private:
-
-            FaceColor _logicalCube[6][3][3];
-    };
 }

@@ -11,10 +11,7 @@ int main()
 {
     Pattern::Pattern pattern;
 
-    pattern.printLogicalCube();
-    pattern.rotateFace(Pattern::RIGHT);
-
-    pattern.rotateFace(Pattern::DOWN);
+    pattern.rotateFace(Pattern::MIDDLE);
     pattern.printLogicalCube();
     // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();
     // sf::RenderWindow window(mode, "Rubik's Cube solver");
