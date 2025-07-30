@@ -45,19 +45,22 @@ namespace Pattern
                 return _logicalCube;
             }
 
+            void classicRotate(int face_index);
             void up(FaceColor temp[3]);
             void down(FaceColor temp[3]);
             void front(FaceColor temp[3]);
             void right(FaceColor temp[3]);
             void left(FaceColor temp[3]);
             void back(FaceColor temp[3]);
+            void rotatex();
+            void rotatey();
+            void rotatez();
             void rotateFace(int face_index);
             void rotateFaceP(int face_index);
             void printLogicalCube();
 
         protected:
         private:
-
             FaceColor _logicalCube[6][3][3];
     };
 
