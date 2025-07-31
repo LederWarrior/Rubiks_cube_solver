@@ -39,7 +39,7 @@ sf::Color Display::getSfColor(Pattern::FaceColor color) {
         case Pattern::RED: return sf::Color::Red;
         case Pattern::GREEN: return sf::Color::Green;
         case Pattern::BLUE: return sf::Color::Blue;
-        case Pattern::ORANGE: return sf::Color(255, 165, 0); // orange
+        case Pattern::ORANGE: return sf::Color(255, 165, 0);
         case Pattern::YELLOW: return sf::Color::Yellow;
         default: return sf::Color::Black;
     }
@@ -73,7 +73,6 @@ void Display::handleKeys(sf::Event event)
         _pattern.rotateFace(Pattern::LEFT);
     if (event.key.code == sf::Keyboard::R)
         _pattern.rotateFace(Pattern::RIGHT);
-    
     setCube(_pattern);
 }
 
@@ -102,6 +101,10 @@ void Display::run() {
                 _window.close();
             if (event.type == sf::Event::KeyPressed) {
                 handleKeys(event);
+            }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                _pattern.whiteCross();
+                setCube(_pattern);
             }
         }
         update();
