@@ -28,6 +28,7 @@
 #include <cctype>
 #include <cmath>
 #include <iomanip>
+#include <iterator>
 #include <random>
 #include <cstring>
 #include <unistd.h>

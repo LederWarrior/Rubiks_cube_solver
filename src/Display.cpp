@@ -33,7 +33,8 @@ void Display::setCube(Pattern::Pattern pattern)
     }
 }
 
-sf::Color Display::getSfColor(Pattern::FaceColor color) {
+sf::Color Display::getSfColor(Pattern::FaceColor color)
+{
     switch (color) {
         case Pattern::WHITE: return sf::Color::White;
         case Pattern::RED: return sf::Color::Red;
@@ -45,7 +46,8 @@ sf::Color Display::getSfColor(Pattern::FaceColor color) {
     }
 }
 
-void Display::drawFace(Pattern::FaceName face, int offsetX, int offsetY) {
+void Display::drawFace(Pattern::FaceName face, int offsetX, int offsetY)
+{
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
@@ -73,10 +75,19 @@ void Display::handleKeys(sf::Event event)
         _pattern.rotateFace(Pattern::LEFT);
     if (event.key.code == sf::Keyboard::R)
         _pattern.rotateFace(Pattern::RIGHT);
+    if (event.key.code == sf::Keyboard::X)
+        _pattern.rotatex();
+    if (event.key.code == sf::Keyboard::Y)
+        _pattern.rotatey();
+    if (event.key.code == sf::Keyboard::Z)
+        _pattern.rotatez();
+    if (event.key.code == sf::Keyboard::E)
+        _pattern.rotateFace(Pattern::EQUATOR);
     setCube(_pattern);
 }
 
-void Display::update() {
+void Display::update()
+{
     _window.clear(sf::Color(50, 50, 50));
 
     int cx = 1920 / 3;
@@ -93,7 +104,8 @@ void Display::update() {
     _window.display();
 }
 
-void Display::run() {
+void Display::run()
+{
     while (_window.isOpen()) {
         sf::Event event;
         while (_window.pollEvent(event)) {
@@ -103,7 +115,8 @@ void Display::run() {
                 handleKeys(event);
             }
             if (event.type == sf::Event::MouseButtonPressed) {
-                _pattern.whiteCross();
+                if (_pattern.isSolved() == false)
+                    _pattern.whiteCross();
                 setCube(_pattern);
             }
         }

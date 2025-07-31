@@ -53,7 +53,7 @@ namespace Pattern
                 FaceName thirdFace;
                 int thirdX, thirdY;
             };
-
+            
             void classicRotate(int face_index);
             void up(FaceColor temp[3]);
             void down(FaceColor temp[3]);
@@ -65,17 +65,22 @@ namespace Pattern
             void rotatey();
             void rotatez();
             void rotateFace(int face_index);
+            
             void printLogicalCube();
+            void turnToYellowCenter();
+            void turnToCenter(FaceColor face);
             void makeMargueritte();
             void whiteCross();
             void whiteCorners();
+            bool checkWhiteCorners();
+            bool checkOneCorner(std::array<FaceColor, 3> corner, FaceColor color);
             void enBas(FaceColor color);
             bool isBadCorner(const Corner &corner);
             std::vector<Corner> getDownCorners(const std::vector<Corner>& allCorners);
+            bool isSolved();
             // FaceName findInLine(FaceColor color, std::vector<FaceName> faces) const;
 
 
-            void turnToYellowCenter();
 
         protected:
         private:

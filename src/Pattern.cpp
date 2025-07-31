@@ -70,7 +70,7 @@ void Pattern::Pattern::down(FaceColor temp[3])
     for (int i = 0; i < 3; ++i)
         _logicalCube[FRONT][2][i] = _logicalCube[LEFT][2][i];
     for (int i = 0; i < 3; ++i)
-        _logicalCube[LEFT][2][i] = _logicalCube[BACK][2][2 - i];
+        _logicalCube[LEFT][2][i] = _logicalCube[BACK][2][i];
     for (int i = 0; i < 3; ++i)
         _logicalCube[BACK][2][i] = _logicalCube[RIGHT][2][i];
     for (int i = 0; i < 3; ++i)
@@ -142,19 +142,19 @@ void Pattern::Pattern::rotatex()
                 temp[i][j][k] = _logicalCube[i][j][k];
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[FRONT][i][j] = temp[UP][i][j];
+            _logicalCube[UP][i][j] = temp[FRONT][i][j];
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[DOWN][i][j] = temp[FRONT][i][j];
+            _logicalCube[BACK][i][j] = temp[UP][2 - i][2 - j];
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[BACK][i][j] = temp[DOWN][2 - i][2 - j];
+            _logicalCube[DOWN][i][j] = temp[BACK][2 - i][2 - j];
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            _logicalCube[UP][i][j] = temp[BACK][2 - i][2 - j];
+            _logicalCube[FRONT][i][j] = temp[DOWN][i][j];
     for (int i = 0; i < 3; i++)
-        classicRotate(RIGHT);
-    classicRotate(LEFT);
+        classicRotate(LEFT);
+    classicRotate(RIGHT);
 }
 
 void Pattern::Pattern::rotatey()
@@ -183,6 +183,7 @@ void Pattern::Pattern::rotatey()
 
 void Pattern::Pattern::rotatez()
 {
+    std::cout << "Z" << std::endl;
     FaceColor temp[6][3][3];
 
     for (int i = 0; i < 6; i++)
@@ -263,12 +264,6 @@ void Pattern::Pattern::rotateFace(int face_index)
         right(temp2);
     } else if (face_index == LEFT) {
         left(temp2);
-    } else if (face_index == X) {
-        rotatex();
-    } else if (face_index == Y) {
-        rotatey();
-    } else if (face_index == Z) {
-        rotatez();
     }
 }
 
@@ -320,4 +315,20 @@ void Pattern::Pattern::enBas(FaceColor color)
             continue;
         }
     }
+}
+
+bool Pattern::Pattern::isSolved()
+{
+    FaceColor center;
+
+    for (int i = 0; i < 6; i++) {
+        center = _logicalCube[i][1][1];
+        for (int j = 0; j < 3; j++) {
+            for (int f = 0; f < 3; f++) {
+                if (_logicalCube[i][j][f] != center)
+                    return false;
+            }
+        }
+    }
+    return true;
 }

@@ -35,11 +35,11 @@ int main()
     pattern.rotateFace(Pattern::MIDDLE);
 
     pattern.printLogicalCube();
+    std::cout << "white corners go" << std::endl;
     pattern.whiteCross();
     pattern.whiteCorners();
+    std::cout << "white corners made" << std::endl;
     pattern.printLogicalCube();
-
-    
 
     // Display disp_window();
     // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();
