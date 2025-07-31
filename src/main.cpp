@@ -11,19 +11,22 @@ int main()
 {
     Pattern::Pattern pattern;
 
-    pattern.rotateFace(Pattern::BACK);
     pattern.rotateFace(Pattern::DOWN);
     pattern.rotateFace(Pattern::STANDING);
-    pattern.rotateFace(Pattern::RIGHT);
     pattern.rotateFace(Pattern::LEFT);
     pattern.rotateFace(Pattern::DOWN);
-    pattern.rotateFace(Pattern::EQUATOR);
-    pattern.rotateFace(Pattern::MIDDLE);
+    pattern.rotateFace(Pattern::BACK);
     pattern.rotateFace(Pattern::UP);
-    // pattern.turnToYellowCenter();
-    pattern.makeMargueritte();
+    pattern.rotateFace(Pattern::EQUATOR);
+    pattern.rotateFace(Pattern::RIGHT);
+    pattern.rotateFace(Pattern::MIDDLE);
+
     pattern.printLogicalCube();
-    // pattern.rotatez();
+    pattern.whiteCross();
+    pattern.whiteCorners();
+    pattern.printLogicalCube();
+
+
 
     // Display disp_window();
     // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();

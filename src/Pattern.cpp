@@ -302,3 +302,22 @@ void Pattern::Pattern::printLogicalCube()
     }
 }
 
+void Pattern::Pattern::enBas(FaceColor color)
+{
+    int i = 0;
+
+    for (; i < 6; i++)
+        if (_logicalCube[i][1][1] == color)
+            break;
+    while (_logicalCube[DOWN][1][1] != color) {
+        if (_logicalCube[UP][1][1] == color
+            || _logicalCube[BACK][1][1] == color
+            || _logicalCube[FRONT][1][1] == color) {
+            rotatex();
+            continue;
+        } else {
+            rotatez();
+            continue;
+        }
+    }
+}

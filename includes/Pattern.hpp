@@ -45,6 +45,15 @@ namespace Pattern
                 return _logicalCube;
             }
 
+            struct Corner {
+                FaceName firstFace;
+                int firstX, firstY;
+                FaceName secondFace;
+                int secondX, secondY;
+                FaceName thirdFace;
+                int thirdX, thirdY;
+            };
+
             void classicRotate(int face_index);
             void up(FaceColor temp[3]);
             void down(FaceColor temp[3]);
@@ -58,6 +67,11 @@ namespace Pattern
             void rotateFace(int face_index);
             void printLogicalCube();
             void makeMargueritte();
+            void whiteCross();
+            void whiteCorners();
+            void enBas(FaceColor color);
+            bool isBadCorner(const Corner &corner);
+            std::vector<Corner> getDownCorners(const std::vector<Corner>& allCorners);
             // FaceName findInLine(FaceColor color, std::vector<FaceName> faces) const;
 
 
