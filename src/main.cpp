@@ -11,6 +11,19 @@ int main()
 {
     Pattern::Pattern pattern;
 
+    Pattern::FaceColor logicalCube[6][3][3];
+    const auto& sourceCube = pattern.getLogicalCube();
+
+    for(int i = 0; i < 6; i++) {
+        for(int j = 0; j < 3; j++) {
+            for(int k = 0; k < 3; k++) {
+                logicalCube[i][j][k] = sourceCube[i][j][k];
+            }
+        }
+    }
+    Display disp(logicalCube, pattern);
+    disp.run();
+
     pattern.rotateFace(Pattern::DOWN);
     pattern.rotateFace(Pattern::STANDING);
     pattern.rotateFace(Pattern::LEFT);
@@ -26,7 +39,7 @@ int main()
     pattern.whiteCorners();
     pattern.printLogicalCube();
 
-
+    
 
     // Display disp_window();
     // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();

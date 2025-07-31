@@ -12,12 +12,20 @@
 
 class Display {
     public:
-        Display(std::shared_ptr<Pattern::Pattern> cube_pattern);
-        ~Display();
-        void setCube(std::shared_ptr<Pattern::Pattern> cube_pattern);
-        void show(Pattern::FaceColor base_cube[6][3][3]);
+        Display(Pattern::FaceColor cube[6][3][3], Pattern::Pattern pattern);
 
-    protected:
+        void run();  // Lance la boucle d'affichage
+        void update(); // Met à jour l'affichage du cube
+        void setCube(Pattern::Pattern pattern);
+        void handleKeys(sf::Event event);
+
     private:
-        std::shared_ptr<Pattern::Pattern> _cube_pattern;
+        sf::RenderWindow _window;
+        Pattern::FaceColor _logicalCube[6][3][3];
+
+        sf::Color getSfColor(Pattern::FaceColor color);
+        void drawFace(Pattern::FaceName face, int offsetX, int offsetY);
+        const int squareSize = 40;
+        const int padding = 5;
+        Pattern::Pattern _pattern;
 };
