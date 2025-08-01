@@ -183,7 +183,6 @@ void Pattern::Pattern::whiteCorners()
             }
             rotatex();
             rotatey();
-            printLogicalCube();
             std::array<FaceColor, 2> centers = {_logicalCube[FRONT][1][1], _logicalCube[RIGHT][1][1]};
             while (_logicalCube[DOWN][0][2] != WHITE || _logicalCube[FRONT][2][2] != centers[0] || _logicalCube[RIGHT][2][0] != centers[1]) {
                 centers = {_logicalCube[FRONT][1][1], _logicalCube[RIGHT][1][1]};
@@ -193,7 +192,6 @@ void Pattern::Pattern::whiteCorners()
                     rotateFace(RIGHT);
                 for (int i = 0; i < 3; i++)
                     rotateFace(UP);
-                printLogicalCube();
             }
             turnToCenter(YELLOW);
         }
@@ -430,4 +428,94 @@ void Pattern::Pattern::secondCrown()
             continue;
         }
     }
+}
+
+void Pattern::Pattern::yellowCross()
+{
+    std::cout << "After second crown:" << std::endl;
+    printLogicalCube();
+    int stop = 0;
+    int count = 0;
+    while (_logicalCube[FRONT][0][1] != YELLOW || _logicalCube[FRONT][1][0] != YELLOW
+        || _logicalCube[FRONT][2][1] != YELLOW || _logicalCube[FRONT][1][2] != YELLOW || stop > 20) {
+        turnToCenter(YELLOW);
+        count = 0;
+        std::array<FaceColor, 4> comptage_jaune = {_logicalCube[FRONT][0][1], _logicalCube[FRONT][1][2], _logicalCube[FRONT][2][1], _logicalCube[FRONT][1][0]};
+        for (int i = 0; i < 4; i++) {
+            if (comptage_jaune[i] == YELLOW)
+                count++;
+        }
+        if (count == 0 || count == 1) {
+            rotateFace(FRONT);
+            rotateFace(RIGHT);
+            rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(RIGHT);
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(FRONT);
+        } if (count == 2 || count == 3) {
+            if (comptage_jaune[0] == YELLOW && comptage_jaune[2] == YELLOW)
+                rotateFace(UP);
+            if (comptage_jaune[3] == YELLOW || comptage_jaune[1] == YELLOW) {
+                rotateFace(FRONT);
+                rotateFace(RIGHT);
+                rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(FRONT);
+                break;
+            }
+        } else {
+            if (_logicalCube[FRONT][1][0] == YELLOW && _logicalCube[FRONT][2][1] == YELLOW)  {
+                rotateFace(FRONT);
+                rotateFace(FRONT);
+                rotateFace(RIGHT);
+                rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(FRONT);
+            } else if (_logicalCube[FRONT][2][1] == YELLOW && _logicalCube[FRONT][1][2] == YELLOW) {
+                rotateFace(FRONT);
+                rotateFace(FRONT);
+                rotateFace(FRONT);
+                rotateFace(RIGHT);
+                rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(FRONT);
+            } else if (_logicalCube[FRONT][0][1] == YELLOW && _logicalCube[FRONT][1][2] == YELLOW) {
+                // 4 F, so no need
+                rotateFace(RIGHT);
+                rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(FRONT);
+            } else {
+                rotateFace(FRONT);
+                rotateFace(RIGHT);
+                rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(FRONT);
+            }
+        }
+        stop++;
+    } 
 }

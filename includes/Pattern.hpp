@@ -76,6 +76,7 @@ namespace Pattern
             void whiteCorners();
             bool checkSecondCrown();
             void secondCrown();
+            void yellowCross();
 
         protected:
         private:
