@@ -38,21 +38,11 @@ namespace Pattern
         public:
             Pattern();
             ~Pattern();
-            bool isDoable();
             std::string solve();
             void reset();
             const FaceColor (&getLogicalCube() const)[6][3][3] {
                 return _logicalCube;
             }
-
-            struct Corner {
-                FaceName firstFace;
-                int firstX, firstY;
-                FaceName secondFace;
-                int secondX, secondY;
-                FaceName thirdFace;
-                int thirdX, thirdY;
-            };
             
             void classicRotate(int face_index);
             void up(FaceColor temp[3]);
@@ -65,124 +55,22 @@ namespace Pattern
             void rotatey();
             void rotatez();
             void rotateFace(int face_index);
-            
+            void scramble(int min, int max);
+            bool isDoable();
+            bool isSolved();
+
             void printLogicalCube();
-            void turnToYellowCenter();
             void turnToCenter(FaceColor face);
+            void enBas(FaceColor color);
             void makeMargueritte();
             void whiteCross();
-            void whiteCorners();
             bool checkWhiteCorners();
             bool checkOneCorner(std::array<FaceColor, 3> corner, FaceColor color);
-            void enBas(FaceColor color);
-            bool isBadCorner(const Corner &corner);
-            std::vector<Corner> getDownCorners(const std::vector<Corner>& allCorners);
-            bool isSolved();
-            // FaceName findInLine(FaceColor color, std::vector<FaceName> faces) const;
-
-
+            void whiteCorners();
 
         protected:
         private:
             FaceColor _logicalCube[6][3][3];
             std::string _solution;
     };
-
-    // class Square {
-    //     public:
-    //         Square();
-    //         ~Square();
-    //         void setColor();
-    //     private:
-    //         sf::RectangleShape _rect;
-    //         sf::Color _color;
-    //         int _coordinates[3];
-    //         std::pair<int, int> _real_cos;
-    // };
-
-    // class IFace {
-    //     public:
-    //         virtual ~IFace() = default;
-    //         virtual void setGlobalColor() = 0;
-    //         virtual void setCoordinates() = 0; // top left
-    //         virtual void setSize() = 0;
-    //         virtual void show() = 0;
-    //         virtual std::pair<int, int> getCoordinates() = 0;
-    //         virtual sf::Color getGlobalColor() = 0;
-    //     protected:
-    //         sf::Color _color;
-    //         std::vector<std::shared_ptr<Square>> _squares;
-    // };
-
-    // class CenterFace : public IFace {
-    //     public:
-    //         CenterFace();
-    //         ~CenterFace();
-    //         void setGlobalColor() override;
-    //         void setCoordinates() override;
-    //         void setSize() override;
-    //         void show() override;
-    //         std::pair<int, int> getCoordinates() override;
-    //         sf::Color getGlobalColor() override;
-    // };
-
-    // class TopFace : public IFace {
-    //     public:
-    //         TopFace();
-    //         ~TopFace();
-    //         void setGlobalColor() override;
-    //         void setCoordinates() override;
-    //         void setSize() override;
-    //         void show() override;
-    //         std::pair<int, int> getCoordinates() override;
-    //         sf::Color getGlobalColor() override;
-    // };
-
-    // class BottomFace : public IFace {
-    //     public:
-    //         BottomFace();
-    //         ~BottomFace();
-    //         void setGlobalColor() override;
-    //         void setCoordinates() override;
-    //         void setSize() override;
-    //         void show() override;
-    //         std::pair<int, int> getCoordinates() override;
-    //         sf::Color getGlobalColor() override;
-    // };
-
-    // class RightFace : public IFace {
-    //     public:
-    //         RightFace();
-    //         ~RightFace();
-    //         void setGlobalColor() override;
-    //         void setCoordinates() override;
-    //         void setSize() override;
-    //         void show() override;
-    //         std::pair<int, int> getCoordinates() override;
-    //         sf::Color getGlobalColor() override;
-    // };
-
-    // class LeftFace : public IFace {
-    //     public:
-    //         LeftFace();
-    //         ~LeftFace();
-    //         void setGlobalColor() override;
-    //         void setCoordinates() override;
-    //         void setSize() override;
-    //         void show() override;
-    //         std::pair<int, int> getCoordinates() override;
-    //         sf::Color getGlobalColor() override;
-    // };
-
-    // class BackFace : public IFace {
-    //     public:
-    //         BackFace();
-    //         ~BackFace();
-    //         void setGlobalColor() override;
-    //         void setCoordinates() override;
-    //         void setSize() override;
-    //         void show() override;
-    //         std::pair<int, int> getCoordinates() override;
-    //         sf::Color getGlobalColor() override;
-    // };
 }

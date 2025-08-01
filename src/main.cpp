@@ -7,8 +7,24 @@
 
 #include "../includes/Display.hpp"
 
-int main()
+int main(int ac, char *av[])
 {
+    if (ac > 1) {
+        std::string arg1 = static_cast<std::string>(av[1]);
+        std::cout << "Rubik's cube solver" << std::endl;
+        std::cout << "Arguments: [-h/--help] for help." << std::endl;
+        std::cout << "\nUSAGE:" << std::endl;
+        std::cout << "INPUTS:" << std::endl;
+        std::cout << "\t[U/D/F/B/R/L/X/Y/Z/M/E/S]: movements while the window is open." << std::endl;
+        std::cout << "\tEvery movement is wrote on the STDOUT (standard output) while running." << std::endl;
+        std::cout << "\tEvery movement is clockwise for convenience purposes." << std::endl;
+        std::cout << "\tMovements description:" << std::endl;
+        std::cout << "\t\tU:UP\n\t\tD:DOWN\n\t\tF:FRONT\n\t\tB:BACK\n\t\tR:RIGHT\n\t\tL:LEFT\n\t\tX:X axis rotation\n\t\tY:Y axis rotation" << std::endl;
+        std::cout << "\t\tZ:Z axis rotation\n\t\tM:MIDDLE\n\t\tE:EQUATOR\n\t\tS:STANDING" << std::endl;
+        std::cout << "\t[LEFT CLICK]: Solve the cube (as far as the algorithm goes for now)." << std::endl;
+        return (arg1 == "-h" || arg1 == "--help") ? 0 : 84;
+    }
+
     Pattern::Pattern pattern;
 
     Pattern::FaceColor logicalCube[6][3][3];
@@ -23,73 +39,5 @@ int main()
     }
     Display disp(logicalCube, pattern);
     disp.run();
-
-    pattern.rotateFace(Pattern::DOWN);
-    pattern.rotateFace(Pattern::STANDING);
-    pattern.rotateFace(Pattern::LEFT);
-    pattern.rotateFace(Pattern::DOWN);
-    pattern.rotateFace(Pattern::BACK);
-    pattern.rotateFace(Pattern::UP);
-    pattern.rotateFace(Pattern::EQUATOR);
-    pattern.rotateFace(Pattern::RIGHT);
-    pattern.rotateFace(Pattern::MIDDLE);
-
-    pattern.printLogicalCube();
-    std::cout << "white corners go" << std::endl;
-    pattern.whiteCross();
-    pattern.whiteCorners();
-    std::cout << "white corners made" << std::endl;
-    pattern.printLogicalCube();
-
-    // Display disp_window();
-    // static sf::VideoMode mode = sf::VideoMode::getDesktopMode();
-    // sf::RenderWindow window(mode, "Rubik's Cube solver");
-
-    // Load a sprite to display
-    // sf::Texture texture;
-    // if (!texture.loadFromFile("cute_image.jpg"))
-    //     return -1;
-    // sf::Sprite sprite(texture);
-
-    // Create a graphical text to display
-    // sf::Font font;
-    // if (!font.loadFromFile("arial.ttf"))
-    //     return -1;
-
-    // sf::Text text;
-    // text.setFont(font);
-    // text.setString("Hello SFML");
-    // text.setCharacterSize(50);
-    // text.setFillColor(sf::Color::White); // Optionnel
-
-    // Load and play music
-    // sf::Music music;
-    // if (!music.openFromFile("nice_music.ogg"))
-    //     return -1;
-    // music.play();
-
-    // Start the game loop
-    // while (window.isOpen())
-    // {
-        // Process events
-        // sf::Event event;
-        // while (window.pollEvent(event))
-        // {
-            // Close window: exit
-            // if (event.type == sf::Event::Closed)
-                // window.close();
-        // }
-
-        // Clear screen
-        // window.clear(sf::Color::White);
-
-        // Draw the sprite and text
-        // window.draw(sprite);
-        // window.draw(text);
-
-        // Update the window
-        // window.display();
-    // }
-
     return 0;
 }

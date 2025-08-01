@@ -115,8 +115,10 @@ void Display::run()
                 handleKeys(event);
             }
             if (event.type == sf::Event::MouseButtonPressed) {
-                if (_pattern.isSolved() == false)
+                if (_pattern.isSolved() == false) {
                     _pattern.whiteCross();
+                    _pattern.whiteCorners();
+                }
                 setCube(_pattern);
             }
         }
