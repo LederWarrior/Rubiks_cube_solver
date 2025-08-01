@@ -135,6 +135,7 @@ void Pattern::Pattern::back(FaceColor temp[3])
 
 void Pattern::Pattern::rotatex()
 {
+    std::cout << "X" << std::endl;
     FaceColor temp[6][3][3];
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 3; j++)
@@ -159,6 +160,7 @@ void Pattern::Pattern::rotatex()
 
 void Pattern::Pattern::rotatey()
 {
+    std::cout << "Y" << std::endl;
     FaceColor temp[6][3][3];
     for (int i = 0; i < 6; i++)
         for (int j = 0; j < 3; j++)
