@@ -233,6 +233,7 @@ void Pattern::Pattern::whiteCorners()
 
 bool Pattern::Pattern::checkSecondCrown()
 {
+    turnToCenter(YELLOW);
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (_logicalCube[BACK][i][j] != WHITE)
@@ -252,12 +253,12 @@ bool Pattern::Pattern::checkSecondCrown()
         }
     }
     for (int i = 0; i < 3; i++) {
-        for (int j = 2; j > 0; j--) {
+        for (int j = 1; j < 3; j++) {
             if (_logicalCube[RIGHT][i][j] != _logicalCube[RIGHT][1][1])
                 return false;
         }
     }
-    for (int i = 2; i > 0; i--) {
+    for (int i = 1; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             if (_logicalCube[DOWN][i][j] != _logicalCube[DOWN][1][1])
                 return false;

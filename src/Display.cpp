@@ -117,7 +117,7 @@ void Display::run()
                 if (_pattern.isSolved() == false) {
                     _pattern.whiteCross();
                     _pattern.whiteCorners();
-                    // _pattern.secondCrown();
+                    _pattern.secondCrown();
                 }
                 setCube(_pattern);
             }
