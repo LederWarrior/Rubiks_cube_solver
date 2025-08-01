@@ -7,7 +7,7 @@
 
 #include "../includes/Pattern.hpp"
 
-Pattern::Pattern::Pattern()
+Pattern::Pattern::Pattern() : _begin(0)
 {
     for (int f = 0; f < 6; ++f) {
         FaceColor color = static_cast<FaceColor>(f);
@@ -323,6 +323,35 @@ void Pattern::Pattern::enBas(FaceColor color)
             continue;
         }
     }
+}
+
+void Pattern::Pattern::scramble(int nb)
+{
+    const std::vector<char> moves = {
+        'U', 'D', 'F', 'B', 'R', 'L', 'M', 'E', 'S', 'X', 'Y', 'Z'
+    };
+
+    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr)));
+    std::uniform_int_distribution<> dist(0, moves.size() - 1);
+
+    for (int i = 0; i < nb; ++i) {
+        char move = moves[dist(rng)];
+
+        switch (move) {
+            case 'U': rotateFace(UP); break;
+            case 'D': rotateFace(DOWN); break;
+            case 'F': rotateFace(FRONT); break;
+            case 'B': rotateFace(BACK); break;
+            case 'L': rotateFace(LEFT); break;
+            case 'R': rotateFace(RIGHT); break;
+            case 'X': rotatex(); break;
+            case 'Y': rotatey(); break;
+            case 'Z': rotatez(); break;
+            default: break;
+        }
+    }
+    std::cout << "After scramble:" << std::endl;
+    printLogicalCube();
 }
 
 bool Pattern::Pattern::isSolved()

@@ -22,6 +22,7 @@ int main(int ac, char *av[])
         std::cout << "\t\tU:UP\n\t\tD:DOWN\n\t\tF:FRONT\n\t\tB:BACK\n\t\tR:RIGHT\n\t\tL:LEFT\n\t\tX:X axis rotation\n\t\tY:Y axis rotation" << std::endl;
         std::cout << "\t\tZ:Z axis rotation\n\t\tM:MIDDLE\n\t\tE:EQUATOR\n\t\tS:STANDING" << std::endl;
         std::cout << "\t[LEFT CLICK]: Solve the cube (as far as the algorithm goes for now)." << std::endl;
+        std::cout << "\t[RIGHT CLICK]: Scramble the cube. Movements are put on the STDOUT." << std::endl;
         return (arg1 == "-h" || arg1 == "--help") ? 0 : 84;
     }
 

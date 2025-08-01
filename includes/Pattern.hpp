@@ -50,7 +50,13 @@ namespace Pattern
             const FaceColor (&getLogicalCube() const)[6][3][3] {
                 return _logicalCube;
             }
-            
+            int getBegin() const {
+                return _begin;
+            }
+            void setBegin(int begin) {
+                _begin = begin;
+            }
+
             void classicRotate(int face_index);
             void up(FaceColor temp[3]);
             void down(FaceColor temp[3]);
@@ -62,7 +68,7 @@ namespace Pattern
             void rotatey();
             void rotatez();
             void rotateFace(int face_index);
-            void scramble(int min, int max);
+            void scramble(int nb);
             bool isDoable();
             bool isSolved();
 
@@ -82,5 +88,6 @@ namespace Pattern
         private:
             FaceColor _logicalCube[6][3][3];
             std::string _solution;
+            int _begin;
     };
 }

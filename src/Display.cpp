@@ -105,6 +105,7 @@ void Display::update()
 
 void Display::run()
 {
+    // int i = 0;
     while (_window.isOpen()) {
         sf::Event event;
         while (_window.pollEvent(event)) {
@@ -113,12 +114,36 @@ void Display::run()
             if (event.type == sf::Event::KeyPressed) {
                 handleKeys(event);
             }
-            if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Right) {
+                _pattern.scramble(20);
+                setCube(_pattern);
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left) {
                 if (_pattern.isSolved() == false) {
+                    // for (i = _pattern.getBegin(); i != 0;) {
+                    //     std::cout << "Begin again" << std::endl;
+                    //     if (_pattern.getBegin() != 0) {
+                    //         _pattern.scramble(20);
+                    //         setCube(_pattern);
+                    //     }
+                    //     _pattern.setBegin(0);
+                    //     _pattern.whiteCross();
+                    //     if (_pattern.getBegin() != 0)
+                    //         continue;
+                    //     _pattern.whiteCorners();
+                    //     if (_pattern.getBegin() != 0)
+                    //         continue;
+                    //     _pattern.secondCrown();
+                    //     if (_pattern.getBegin() != 0)
+                    //         continue;
+                    //     _pattern.yellowCross();
+                    //     if (_pattern.getBegin() != 0)
+                    //         continue;
+                    // }
                     _pattern.whiteCross();
                     _pattern.whiteCorners();
-                    // _pattern.secondCrown();
-                    // _pattern.yellowCross();
+                    _pattern.secondCrown();
+                    _pattern.yellowCross();
                 }
                 setCube(_pattern);
             }
