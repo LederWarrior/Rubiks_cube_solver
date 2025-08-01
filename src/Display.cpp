@@ -93,7 +93,6 @@ void Display::update()
     int cx = 1920 / 3;
     int cy = 1080 / 3;
 
-    // Disposition du patron
     drawFace(Pattern::UP, cx + squareSize * 3 + padding * 3, cy - squareSize * 4);
     drawFace(Pattern::LEFT, cx, cy);
     drawFace(Pattern::FRONT, cx + squareSize * 3 + padding * 3, cy);
@@ -118,7 +117,7 @@ void Display::run()
                 if (_pattern.isSolved() == false) {
                     _pattern.whiteCross();
                     _pattern.whiteCorners();
-                    _pattern.secondCrown();
+                    // _pattern.secondCrown();
                 }
                 setCube(_pattern);
             }

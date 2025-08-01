@@ -42,6 +42,7 @@ void Pattern::Pattern::turnToCenter(FaceColor face)
             continue;
         }
     }
+    std::cout << "Turned to center: " << getColor(face) << std::endl;
 }
 
 bool checkMargueritte(Pattern::FaceColor _logicalCube[6][3][3])
@@ -269,6 +270,7 @@ void Pattern::Pattern::secondCrown()
 {
     while (checkSecondCrown() == false) {
         turnToCenter(YELLOW);
+        printLogicalCube();
         std::array<FaceColor, 4> face_centers = {_logicalCube[UP][1][1], _logicalCube[DOWN][1][1], _logicalCube[RIGHT][1][1], _logicalCube[LEFT][1][1]};
         std::array<FaceColor, 2> arrete_haut = {_logicalCube[FRONT][0][1], _logicalCube[UP][2][1]};
         std::array<FaceColor, 2> arrete_droit = {_logicalCube[FRONT][1][2], _logicalCube[RIGHT][1][0]};
@@ -276,19 +278,19 @@ void Pattern::Pattern::secondCrown()
         std::array<FaceColor, 2> arrete_gauche = {_logicalCube[FRONT][1][0], _logicalCube[LEFT][1][2]};
 
         if (arrete_haut[0] != YELLOW && arrete_haut[1] != YELLOW) {
-            if (arrete_haut[1] == face_centers[static_cast<Dictionary>(UP)]) {
+            if (arrete_haut[1] == face_centers[0]) {
                 rotatex();
                 rotatey();
                 rotatey();
-            } else if (arrete_haut[1] == face_centers[static_cast<Dictionary>(RIGHT)]) {
+            } else if (arrete_haut[1] == face_centers[2]) {
                 rotateFace(FRONT);
                 rotatex();
                 rotatey();
-            } else if (arrete_haut[1] == face_centers[static_cast<Dictionary>(DOWN)]) {
+            } else if (arrete_haut[1] == face_centers[1]) {
                 rotateFace(FRONT);
                 rotateFace(FRONT);
                 rotatex();
-            } else if (arrete_haut[1] == face_centers[static_cast<Dictionary>(LEFT)]) {
+            } else if (arrete_haut[1] == face_centers[3]) {
                 rotateFace(FRONT);
                 rotateFace(FRONT);
                 rotateFace(FRONT);
@@ -323,6 +325,9 @@ void Pattern::Pattern::secondCrown()
                 for (int i = 0; i < 3; i++)
                     rotateFace(UP);
                 rotatey();
+                for (int i = 0; i < 3; i++)
+                    rotateFace(LEFT);
+                rotateFace(UP);
                 rotateFace(LEFT);
                 for (int i = 0; i < 3; i++)
                     rotatey();
