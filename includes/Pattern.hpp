@@ -83,6 +83,8 @@ namespace Pattern
             bool checkSecondCrown();
             void secondCrown();
             void yellowCross();
+            bool checkYellowRidges();
+            void yellowRidge();
 
         protected:
         private:

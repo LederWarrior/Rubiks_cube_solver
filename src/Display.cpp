@@ -144,6 +144,7 @@ void Display::run()
                     _pattern.whiteCorners();
                     _pattern.secondCrown();
                     _pattern.yellowCross();
+                    _pattern.yellowRidge();
                 }
                 setCube(_pattern);
             }

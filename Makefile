@@ -15,7 +15,8 @@ NAME = rcs
 SRC = src/main.cpp		\
 		src/Pattern.cpp	\
 		src/Display.cpp	\
-		src/Solve.cpp
+		src/Solve.cpp	\
+		src/Solve2.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
