@@ -34,6 +34,13 @@ namespace Pattern
         Z
     };
 
+    enum Dictionary {
+        UP_ = 0,
+        DOWN_,
+        RIGHT_,
+        LEFT_
+    };
+
     class Pattern {
         public:
             Pattern();
@@ -67,6 +74,8 @@ namespace Pattern
             bool checkWhiteCorners();
             bool checkOneCorner(std::array<FaceColor, 3> corner, FaceColor color);
             void whiteCorners();
+            bool checkSecondCrown();
+            void secondCrown();
 
         protected:
         private:

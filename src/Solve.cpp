@@ -156,8 +156,6 @@ bool Pattern::Pattern::checkOneCorner(std::array<FaceColor, 3> corner, FaceColor
 
 bool checkAnnex(std::vector<Pattern::FaceColor> annex, std::array<Pattern::FaceColor, 2> annex2)
 {
-    std::cout << "Annex:" << getColor(annex[0]) << "," << getColor(annex[1]) << std::endl;
-    std::cout << "Annex2:" << getColor(annex2[0]) << "," << getColor(annex2[1]) << std::endl;
     if ((annex[0] == annex2[0] && annex[1] == annex2[1]) || (annex[0] == annex2[1] && annex[1] == annex2[0]))
         return true;
     return false;
@@ -166,10 +164,8 @@ bool checkAnnex(std::vector<Pattern::FaceColor> annex, std::array<Pattern::FaceC
 void Pattern::Pattern::whiteCorners()
 {
     while (checkWhiteCorners() == false) {
-        std::cout << "Début" << std::endl;
         turnToCenter(YELLOW);
         if (_logicalCube[FRONT][0][2] == WHITE || _logicalCube[UP][2][2] == WHITE || _logicalCube[RIGHT][0][0] == WHITE) {
-            std::cout << "Entered solve if" << std::endl;
             std::vector<FaceColor> annex = {_logicalCube[FRONT][0][2], _logicalCube[UP][2][2], _logicalCube[RIGHT][0][0]};
             for (int i = 0; i < 3; i++) {
                 if (annex[i] == WHITE) {
@@ -179,18 +175,15 @@ void Pattern::Pattern::whiteCorners()
             }
             std::array<FaceColor, 2> annex2 = {_logicalCube[RIGHT][1][1], _logicalCube[UP][1][1]};
             while (checkAnnex(annex, annex2) == false) {
-                std::cout << "Il est la ce fdp" << std::endl;
                 rotateFace(FRONT);
                 for (int i = 0; i < 3; i++)
                     rotatez();
                 annex2 = {_logicalCube[RIGHT][1][1], _logicalCube[UP][1][1]};
             }
-            std::cout << "Redresse" << std::endl;
             rotatex();
             rotatey();
             printLogicalCube();
             std::array<FaceColor, 2> centers = {_logicalCube[FRONT][1][1], _logicalCube[RIGHT][1][1]};
-            std::cout << "Centers:" << getColor(centers[0]) << "," << getColor(centers[1]) << std::endl;
             while (_logicalCube[DOWN][0][2] != WHITE || _logicalCube[FRONT][2][2] != centers[0] || _logicalCube[RIGHT][2][0] != centers[1]) {
                 centers = {_logicalCube[FRONT][1][1], _logicalCube[RIGHT][1][1]};
                 rotateFace(RIGHT);
@@ -199,24 +192,18 @@ void Pattern::Pattern::whiteCorners()
                     rotateFace(RIGHT);
                 for (int i = 0; i < 3; i++)
                     rotateFace(UP);
-                std::cout << "Sexy move" << std::endl;
                 printLogicalCube();
             }
             turnToCenter(YELLOW);
-            std::cout << "At the end of solve if:" << std::endl;
-            printLogicalCube();
         }
         if (_logicalCube[FRONT][0][0] == WHITE || _logicalCube[UP][2][0] == WHITE || _logicalCube[LEFT][0][2] == WHITE) {
-            std::cout << "Bite" << std::endl;
             rotateFace(FRONT);
             continue;
         } if (_logicalCube[FRONT][2][0] == WHITE || _logicalCube[DOWN][0][0] == WHITE || _logicalCube[LEFT][2][2] == WHITE) {
-            std::cout << "Bite" << std::endl;
             rotateFace(FRONT);
             rotateFace(FRONT);
             continue;
         } if (_logicalCube[FRONT][2][2] == WHITE || _logicalCube[DOWN][0][2] == WHITE || _logicalCube[RIGHT][2][0] == WHITE) {
-            std::cout << "Bite test hey" << std::endl;
             for (int i = 0; i < 3; i++)
                 rotateFace(FRONT);
             continue;
@@ -239,6 +226,202 @@ void Pattern::Pattern::whiteCorners()
                 }
             }
             rotatey();
+        }
+    }
+}
+
+bool Pattern::Pattern::checkSecondCrown()
+{
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (_logicalCube[BACK][i][j] != WHITE)
+                return false;
+        }
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 2; j++) {
+            if (_logicalCube[LEFT][i][j] != _logicalCube[LEFT][1][1])
+                return false;
+        }
+    }
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (_logicalCube[UP][i][j] != _logicalCube[UP][1][1])
+                return false;
+        }
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 2; j > 0; j--) {
+            if (_logicalCube[RIGHT][i][j] != _logicalCube[RIGHT][1][1])
+                return false;
+        }
+    }
+    for (int i = 2; i > 0; i--) {
+        for (int j = 0; j < 3; j++) {
+            if (_logicalCube[DOWN][i][j] != _logicalCube[DOWN][1][1])
+                return false;
+        }
+    }
+    return true;
+}
+
+void Pattern::Pattern::secondCrown()
+{
+    while (checkSecondCrown() == false) {
+        turnToCenter(YELLOW);
+        std::array<FaceColor, 4> face_centers = {_logicalCube[UP][1][1], _logicalCube[DOWN][1][1], _logicalCube[RIGHT][1][1], _logicalCube[LEFT][1][1]};
+        std::array<FaceColor, 2> arrete_haut = {_logicalCube[FRONT][0][1], _logicalCube[UP][2][1]};
+        std::array<FaceColor, 2> arrete_droit = {_logicalCube[FRONT][1][2], _logicalCube[RIGHT][1][0]};
+        std::array<FaceColor, 2> arrete_bas = {_logicalCube[FRONT][2][1], _logicalCube[DOWN][0][1]};
+        std::array<FaceColor, 2> arrete_gauche = {_logicalCube[FRONT][1][0], _logicalCube[LEFT][1][2]};
+
+        if (arrete_haut[0] != YELLOW && arrete_haut[1] != YELLOW) {
+            if (arrete_haut[1] == face_centers[static_cast<Dictionary>(UP)]) {
+                rotatex();
+                rotatey();
+                rotatey();
+            } else if (arrete_haut[1] == face_centers[static_cast<Dictionary>(RIGHT)]) {
+                rotateFace(FRONT);
+                rotatex();
+                rotatey();
+            } else if (arrete_haut[1] == face_centers[static_cast<Dictionary>(DOWN)]) {
+                rotateFace(FRONT);
+                rotateFace(FRONT);
+                rotatex();
+            } else if (arrete_haut[1] == face_centers[static_cast<Dictionary>(LEFT)]) {
+                rotateFace(FRONT);
+                rotateFace(FRONT);
+                rotateFace(FRONT);
+                rotatex();
+                rotatey();
+                rotatey();
+                rotatey();
+            }
+            if (arrete_haut[0] == _logicalCube[LEFT][1][1]) {
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(LEFT);
+                rotateFace(UP);
+                rotateFace(LEFT);
+                rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotatey();
+                rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                rotatey();
+            } else if (arrete_haut[0] == _logicalCube[RIGHT][1][1]) {
+                rotateFace(UP);
+                rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(RIGHT);
+                for (int i = 0; i < 3; i++)
+                    rotateFace(UP);
+                rotatey();
+                rotateFace(LEFT);
+                for (int i = 0; i < 3; i++)
+                    rotatey();
+            }
+            continue;
+        } if (arrete_droit[0] != YELLOW && arrete_droit[1] != YELLOW) {
+            for (int i = 0; i < 3; i++)
+                rotateFace(FRONT);
+            continue;
+        } if (arrete_bas[0] != YELLOW && arrete_bas[1] != YELLOW) {
+            rotateFace(FRONT);
+            rotateFace(FRONT);
+            continue;
+        }  if (arrete_gauche[0] != YELLOW && arrete_gauche[1] != YELLOW) {
+            rotateFace(FRONT);
+            continue;
+        }
+        std::array<FaceColor, 2> ar_hd = {_logicalCube[UP][1][2], _logicalCube[RIGHT][0][1]};
+        std::array<FaceColor, 2> ar_bd = {_logicalCube[RIGHT][2][1], _logicalCube[DOWN][1][2]};
+        std::array<FaceColor, 2> ar_bg = {_logicalCube[DOWN][1][0], _logicalCube[LEFT][2][1]};
+        std::array<FaceColor, 2> ar_hg = {_logicalCube[LEFT][0][1], _logicalCube[UP][1][0]};
+
+        if (ar_hd[0] != YELLOW && ar_hd[1] != YELLOW) {
+            rotatex();
+            rotatey();
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(LEFT);
+            rotateFace(UP);
+            rotateFace(LEFT);
+            rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotatey();
+            rotateFace(RIGHT);
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(RIGHT);
+            rotatey();
+            continue;
+        } if (ar_bd[0] != YELLOW && ar_bd[1] != YELLOW) {
+            rotatex();
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(LEFT);
+            rotateFace(UP);
+            rotateFace(LEFT);
+            rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotatey();
+            rotateFace(RIGHT);
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(RIGHT);
+            rotatey();
+            continue;
+        } if (ar_bg[0] != YELLOW && ar_bg[1] != YELLOW) {
+            rotatex();
+            for (int i = 0; i < 3; i++)
+                rotatey();
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(LEFT);
+            rotateFace(UP);
+            rotateFace(LEFT);
+            rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotatey();
+            rotateFace(RIGHT);
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(RIGHT);
+            rotatey();
+            continue;
+        } if (ar_hg[0] != YELLOW && ar_hg[1] != YELLOW) {
+            rotatex();
+            rotatey();
+            rotatey();
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(LEFT);
+            rotateFace(UP);
+            rotateFace(LEFT);
+            rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotatey();
+            rotateFace(RIGHT);
+            for (int i = 0; i < 3; i++)
+                rotateFace(UP);
+            for (int i = 0; i < 3; i++)
+                rotateFace(RIGHT);
+            rotatey();
+            continue;
         }
     }
 }

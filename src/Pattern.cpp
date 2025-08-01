@@ -223,11 +223,18 @@ static std::string getFace(Pattern::FaceName face)
         return "LEFT";
     if (face == Pattern::BACK)
         return "BACK";
+    if (face == Pattern::MIDDLE)
+        return "MIDDLE";
+    if (face == Pattern::STANDING)
+        return "STANDING";
+    if (face == Pattern::EQUATOR)
+        return "EQUATOR";
     return nullptr;
 }
 
 void Pattern::Pattern::rotateFace(int face_index)
 {
+    std::cout << getFace(static_cast<FaceName>(face_index)) << std::endl;
     switch (face_index) {
         case MIDDLE:
             rotateFace(RIGHT);
@@ -251,7 +258,6 @@ void Pattern::Pattern::rotateFace(int face_index)
         default:
             break;
     }
-    std::cout << getFace(static_cast<FaceName>(face_index)) << std::endl;
     classicRotate(face_index);
     FaceColor temp2[3];
     if (face_index == UP) {
