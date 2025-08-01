@@ -28,8 +28,6 @@ bool Pattern::Pattern::checkYellowRidges()
 void Pattern::Pattern::yellowRidge()
 {
     int stop = 0;
-    std::cout << "Où qu'on en est?" << std::endl;
-    printLogicalCube();
     while (checkYellowRidges() == false) {
         turnToCenter(YELLOW);
         if (_logicalCube[UP][2][1] == _logicalCube[UP][1][1] && _logicalCube[RIGHT][1][0] == _logicalCube[RIGHT][1][1]) {
