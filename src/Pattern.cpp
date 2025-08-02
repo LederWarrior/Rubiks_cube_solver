@@ -24,7 +24,6 @@ Pattern::Pattern::~Pattern()
 void Pattern::Pattern::classicRotate(int face_index)
 {
     FaceColor temp[3][3];
-    // FaceColor other_temp[3][3];
 
     for (int i = 0; i < 3; ++i)
         for (int j = 0; j < 3; ++j)
@@ -32,21 +31,6 @@ void Pattern::Pattern::classicRotate(int face_index)
     for (int i = 0; i < 3; ++i)
         for (int j = 0; j < 3; ++j)
             _logicalCube[face_index][j][2 - i] = temp[i][j];
-    // _logicalCube[face_index][0][0] = temp[2][0];
-    // _logicalCube[face_index][0][1] = temp[2][1];
-    // _logicalCube[face_index][0][2] = temp[2][2];
-    // _logicalCube[face_index][2][0] = temp[0][0];
-    // _logicalCube[face_index][2][1] = temp[0][1];
-    // _logicalCube[face_index][2][2] = temp[0][2];
-    // for (int j = 0; j < 3; ++j)
-    //     for (int f = 0; f < 3; ++f)
-    //         other_temp[j][f] = _logicalCube[face_index][j][f];
-    // _logicalCube[face_index][0][1] = other_temp[1][0];
-    // _logicalCube[face_index][0][2] = other_temp[2][0];
-    // _logicalCube[face_index][1][0] = other_temp[0][1];
-    // _logicalCube[face_index][2][0] = other_temp[0][2];
-    // _logicalCube[face_index][2][1] = other_temp[1][2];
-    // _logicalCube[face_index][1][2] = other_temp[2][1];
 }
 
 void Pattern::Pattern::up(FaceColor temp[3])
