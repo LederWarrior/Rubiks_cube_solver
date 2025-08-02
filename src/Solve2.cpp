@@ -7,23 +7,6 @@
 
 #include "../includes/Pattern.hpp"
 
-static std::string getColor(Pattern::FaceColor color)
-{
-    if (color == Pattern::WHITE)
-        return "WHITE";
-    if (color == Pattern::YELLOW)
-        return "YELLOW";
-    if (color == Pattern::BLUE)
-        return "BLUE";
-    if (color == Pattern::GREEN)
-        return "GREEN";
-    if (color == Pattern::RED)
-        return "RED";
-    if (color == Pattern::ORANGE)
-        return "ORANGE";
-    return nullptr;
-}
-
 int Pattern::Pattern::countInList(std::vector<FaceColor> list, FaceColor color)
 {
     int count = 0;
