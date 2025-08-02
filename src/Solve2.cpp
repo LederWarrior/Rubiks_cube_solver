@@ -113,8 +113,6 @@ void Pattern::Pattern::yellowRidge()
 
 bool Pattern::Pattern::doesMatch(std::vector<FaceColor> list1, std::vector<FaceColor> list2)
 {
-    std::cout << "List1: " << getColor(list1[0]) << "," << getColor(list1[1]) << "," << getColor(list1[2]) << std::endl;
-    std::cout << "List2: " << getColor(list2[0]) << "," << getColor(list2[1]) << "," << getColor(list2[2]) << std::endl;
     for (int i = 0; i < 3; i++) {
         if (list1[i] == YELLOW)
             list1.erase(list1.begin() + i);
@@ -205,5 +203,48 @@ void Pattern::Pattern::yellowCorners()
         stop++;
         if (stop >= 50)
             break;
+    }
+    std::cout << "Yellow corners:" << std::endl;
+    printLogicalCube();
+}
+
+void Pattern::Pattern::finishHim()
+{
+    if (isSolved() == true)
+        return;
+    turnToCenter(YELLOW);
+    for (int i = 0; i < 3; i++)
+        rotatex();
+    while (isSolved() == false) {
+        if (_logicalCube[FRONT][2][2] != _logicalCube[UP][1][1]
+            || _logicalCube[RIGHT][2][0] == _logicalCube[RIGHT][1][1]
+            || _logicalCube[DOWN][0][2] == _logicalCube[DOWN][1][1]) {
+                while (_logicalCube[DOWN][0][2] != YELLOW) {
+                    rotateFace(RIGHT);
+                    rotateFace(UP);
+                    for (int i = 0; i < 3; i++)
+                        rotateFace(RIGHT);
+                    for (int i = 0; i < 3; i++)
+                        rotateFace(UP);
+                }
+                rotateFace(DOWN);
+                while (isSolved() == false) {
+                    if (_logicalCube[FRONT][2][2] != _logicalCube[UP][1][1]
+                        || _logicalCube[RIGHT][2][0] == _logicalCube[RIGHT][1][1]
+                        || _logicalCube[DOWN][0][2] == _logicalCube[DOWN][1][1]) {
+                            while (_logicalCube[DOWN][0][2] != YELLOW) {
+                                rotateFace(RIGHT);
+                                rotateFace(UP);
+                                for (int i = 0; i < 3; i++)
+                                    rotateFace(RIGHT);
+                                for (int i = 0; i < 3; i++)
+                                    rotateFace(UP);
+                            }
+                    }
+                    rotateFace(DOWN);
+                }
+        } else {
+            rotatez();
+        }
     }
 }

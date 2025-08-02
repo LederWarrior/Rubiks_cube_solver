@@ -69,7 +69,6 @@ namespace Pattern
             void rotatez();
             void rotateFace(int face_index);
             void scramble(int nb);
-            // bool isDoable();
             bool isSolved();
 
             void printLogicalCube();
@@ -89,6 +88,7 @@ namespace Pattern
             bool doesMatch(std::vector<FaceColor> list1, std::vector<FaceColor> list2);
             bool checkYellowCorners();
             void yellowCorners();
+            void finishHim();
 
         protected:
         private:
